@@ -1,141 +1,298 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>PosterLink - Crea Posters de tus Videos</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet" />
-  <style>
-    :root {
-      --primary-color: #2563eb;
-      --primary-hover: #1d4ed8;
-      --background-color: #111827;
-      --card-background: #1f2937;
-      --text-color: #f9fafb;
-      --text-secondary: #9ca3af;
-      --border-color: #374151;
-    }
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    body {
-      font-family: "Poppins", sans-serif;
-      display: flex; justify-content: center; align-items: center;
-      min-height: 100vh; background: var(--background-color); color: var(--text-color);
-    }
-    .main-container {
-      display: flex; width: 900px; max-width: 90vw; height: 600px;
-      background: var(--card-background); border-radius: 20px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.5); overflow: hidden;
-    }
-    .branding-panel {
-      width: 50%; background: linear-gradient(45deg,#1e3a8a,#3b82f6);
-      padding: 40px; display: flex; flex-direction: column; justify-content: center; color: white;
-    }
-    .branding-panel h1 { font-size: 2.5rem; font-weight: 700; margin-bottom: 1rem; }
-    .branding-panel p { font-size: 1.1rem; line-height: 1.6; margin-bottom: 2rem; }
-    .branding-panel .showcase-image {
-      width: 100%; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-    }
-    .form-panel { width: 50%; padding: 40px; display: flex; flex-direction: column; justify-content: center; }
-    .form-panel h2 { font-size: 2rem; margin-bottom: 1rem; text-align: center; }
-    .form-container input {
-      width: 100%; margin-top: 1rem; padding: 0.8rem; border-radius: 8px;
-      border: 1px solid var(--border-color); background: #374151;
-      color: var(--text-color); font-size: 1rem;
-    }
-    .form-container input:focus {
-      outline: none; border-color: var(--primary-color);
-      box-shadow: 0 0 0 3px rgba(37,99,235,0.3);
-    }
-    .form-container button {
-      width: 100%; margin-top: 1.5rem; padding: 0.8rem; border-radius: 8px;
-      border: none; background: var(--primary-color); color: white;
-      font-size: 1rem; font-weight: 600; cursor: pointer; transition: background 0.3s;
-    }
-    .form-container button:hover { background: var(--primary-hover); }
-    .msg { margin-top: 1rem; font-size: 0.9rem; text-align: center; min-height: 1.2em; }
-    .msg.error { color: #ef4444; }
-    .msg.success { color: #22c55e; }
-    .toggle-link { text-align: center; margin-top: 1.5rem; color: var(--text-secondary); }
-    .toggle-link a { color: var(--primary-color); font-weight: 600; text-decoration: none; cursor: pointer; }
-    .toggle-link a:hover { text-decoration: underline; }
-    .hidden { display: none; }
-    @media (max-width:800px) {
-      .main-container { flex-direction: column; height: auto; max-width: 95vw; }
-      .branding-panel,.form-panel { width: 100%; }
-      .branding-panel { padding: 30px; text-align: center; }
-    }
-  </style>
-</head>
-<body>
-  <div class="main-container">
-    <div class="branding-panel">
-      <h1>PosterLink</h1>
-      <p>Transfórma cualquier video de YouTube en un póster profesional al instante.</p>
-      <div>
-        <img src="https://i.ibb.co/kVBn1mv1/Eladio-Carri-n-Bad-Bunny-Kemba-Walker-Audio-Oficial.png" alt="">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PosterLink - Crea Posters de tus Videos</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --primary-color: #2563eb;
+        --primary-hover: #1d4ed8;
+        --background-color: #111827;
+        --card-background: #1f2937;
+        --text-color: #f9fafb;
+        --text-secondary: #9ca3af;
+        --border-color: #374151;
+      }
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        font-family: "Poppins", sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        background: var(--background-color);
+        color: var(--text-color);
+      }
+      .main-container {
+        display: flex;
+        width: 900px;
+        max-width: 90vw;
+        height: 600px;
+        background: var(--card-background);
+        border-radius: 20px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        overflow: hidden;
+      }
+      .branding-panel {
+        width: 50%;
+        background: linear-gradient(45deg, #1e3a8a, #3b82f6);
+        padding: 40px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        color: white;
+      }
+      .branding-panel h1 {
+        font-size: 2.5rem;
+        font-weight: 700;
+        margin-bottom: 1rem;
+      }
+      .branding-panel p {
+        font-size: 1.1rem;
+        line-height: 1.6;
+        margin-bottom: 2rem;
+      }
+      .branding-panel .showcase-image {
+        width: 100%;
+        border-radius: 10px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+      }
+      .form-panel {
+        width: 50%;
+        padding: 40px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
+      .form-panel h2 {
+        font-size: 2rem;
+        margin-bottom: 1rem;
+        text-align: center;
+      }
+      .form-container input {
+        width: 100%;
+        margin-top: 1rem;
+        padding: 0.8rem;
+        border-radius: 8px;
+        border: 1px solid var(--border-color);
+        background: #374151;
+        color: var(--text-color);
+        font-size: 1rem;
+      }
+      .form-container input:focus {
+        outline: none;
+        border-color: var(--primary-color);
+        box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.3);
+      }
+      .form-container button {
+        width: 100%;
+        margin-top: 1.5rem;
+        padding: 0.8rem;
+        border-radius: 8px;
+        border: none;
+        background: var(--primary-color);
+        color: white;
+        font-size: 1rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: background 0.3s;
+      }
+      .form-container button:hover {
+        background: var(--primary-hover);
+      }
+      .msg {
+        margin-top: 1rem;
+        font-size: 0.9rem;
+        text-align: center;
+        min-height: 1.2em;
+      }
+      .msg.error {
+        color: #ef4444;
+      }
+      .msg.success {
+        color: #22c55e;
+      }
+      .toggle-link {
+        text-align: center;
+        margin-top: 1.5rem;
+        color: var(--text-secondary);
+      }
+      .toggle-link a {
+        color: var(--primary-color);
+        font-weight: 600;
+        text-decoration: none;
+        cursor: pointer;
+      }
+      .toggle-link a:hover {
+        text-decoration: underline;
+      }
+      .hidden {
+        display: none;
+      }
+      @media (max-width: 800px) {
+        .main-container {
+          flex-direction: column;
+          height: auto;
+          max-width: 95vw;
+        }
+        .branding-panel,
+        .form-panel {
+          width: 100%;
+        }
+        .branding-panel {
+          padding: 30px;
+          text-align: center;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="main-container">
+      <div class="branding-panel">
+        <h1>PosterLink</h1>
+        <p>
+          Transfórma cualquier video de YouTube en un póster profesional al
+          instante.
+        </p>
+        <div>
+          <img
+            src="https://i.ibb.co/kVBn1mv1/Eladio-Carri-n-Bad-Bunny-Kemba-Walker-Audio-Oficial.png"
+            alt=""
+          />
+        </div>
+      </div>
+      <div class="form-panel">
+        <div id="login-form">
+          <h2>Bienvenido de nuevo</h2>
+          <div class="form-container">
+            <input
+              type="email"
+              id="loginEmail"
+              placeholder="Correo electrónico"
+            />
+            <input
+              type="password"
+              id="loginPassword"
+              placeholder="Contraseña"
+            />
+            <button onclick="login()">Entrar</button>
+            <p class="msg" id="loginMsg"></p>
+          </div>
+          <p class="toggle-link">
+            ¿No tienes cuenta? <a id="show-register">Regístrate aquí</a>
+          </p>
+        </div>
+        <div id="register-form" class="hidden">
+          <h2>Crea tu cuenta</h2>
+          <div class="form-container">
+            <input type="text" id="regName" placeholder="Nombre" />
+            <input
+              type="email"
+              id="regEmail"
+              placeholder="Correo electrónico"
+            />
+            <input type="password" id="regPassword" placeholder="Contraseña" />
+            <button onclick="register()">Registrar</button>
+            <p class="msg" id="regMsg"></p>
+          </div>
+          <p class="toggle-link">
+            ¿Ya tienes cuenta? <a id="show-login">Inicia sesión</a>
+          </p>
+        </div>
       </div>
     </div>
-    <div class="form-panel">
-      <div id="login-form">
-        <h2>Bienvenido de nuevo</h2>
-        <div class="form-container">
-          <input type="email" id="loginEmail" placeholder="Correo electrónico" />
-          <input type="password" id="loginPassword" placeholder="Contraseña" />
-          <button onclick="login()">Entrar</button>
-          <p class="msg" id="loginMsg"></p>
-        </div>
-        <p class="toggle-link">¿No tienes cuenta? <a id="show-register">Regístrate aquí</a></p>
-      </div>
-      <div id="register-form" class="hidden">
-        <h2>Crea tu cuenta</h2>
-        <div class="form-container">
-          <input type="text" id="regName" placeholder="Nombre" />
-          <input type="email" id="regEmail" placeholder="Correo electrónico" />
-          <input type="password" id="regPassword" placeholder="Contraseña" />
-          <button onclick="register()">Registrar</button>
-          <p class="msg" id="regMsg"></p>
-        </div>
-        <p class="toggle-link">¿Ya tienes cuenta? <a id="show-login">Inicia sesión</a></p>
-      </div>
-    </div>
-  </div>
-  <script>
-    const API_URL = "https://posterlink.onrender.com";
-    const loginForm = document.getElementById("login-form");
-    const registerForm = document.getElementById("register-form");
-    document.getElementById("show-register").addEventListener("click",()=>{loginForm.classList.add("hidden");registerForm.classList.remove("hidden");});
-    document.getElementById("show-login").addEventListener("click",()=>{registerForm.classList.add("hidden");loginForm.classList.remove("hidden");});
-    async function register(){
-      const email=document.getElementById("regEmail").value.trim();
-      const password=document.getElementById("regPassword").value.trim();
-      const name=document.getElementById("regName").value.trim();
-      const msg=document.getElementById("regMsg");
-      msg.textContent="Procesando..."; msg.className="msg";
-      try{
-        const res=await fetch(`${API_URL}/register`,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({name,email,password})});
-        const data=await res.json();
-        if(res.ok){ msg.textContent="✅ Registro exitoso"; msg.classList.add("success"); setTimeout(()=>{registerForm.classList.add("hidden");loginForm.classList.remove("hidden");},1500);}
-        else{ msg.textContent=`❌ ${data.error||"Error en el registro"}`; msg.classList.add("error");}
-      }catch(err){ msg.textContent="❌ Error de conexión"; msg.classList.add("error");}
-    }
-    async function login(){
-      const email=document.getElementById("loginEmail").value.trim();
-      const password=document.getElementById("loginPassword").value.trim();
-      const msg=document.getElementById("loginMsg");
-      msg.textContent="Procesando..."; msg.className="msg";
-      try{
-        const res=await fetch(`${API_URL}/login`,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({email,password})});
-        const data=await res.json();
-        if(res.ok){
-          localStorage.setItem("token",data.token);
-          localStorage.setItem("user",JSON.stringify({userId:data.user.userId,name:data.user.name,email:data.user.email,isPremium:data.user.isPremium}));
-          msg.textContent="✅ Login exitoso"; msg.classList.add("success");
-          setTimeout(()=>{window.location.href="dashboard.html";},1000);
-        } else { msg.textContent=`❌ ${data.error||"Credenciales inválidas"}`; msg.classList.add("error"); }
-      }catch(err){ msg.textContent="❌ Error de conexión"; msg.classList.add("error"); }
-    }
-  </script>
-</body>
+    <script>
+      const API_URL = "https://posterlink.onrender.com";
+      const loginForm = document.getElementById("login-form");
+      const registerForm = document.getElementById("register-form");
+      document.getElementById("show-register").addEventListener("click", () => {
+        loginForm.classList.add("hidden");
+        registerForm.classList.remove("hidden");
+      });
+      document.getElementById("show-login").addEventListener("click", () => {
+        registerForm.classList.add("hidden");
+        loginForm.classList.remove("hidden");
+      });
+      async function register() {
+        const email = document.getElementById("regEmail").value.trim();
+        const password = document.getElementById("regPassword").value.trim();
+        const name = document.getElementById("regName").value.trim();
+        const msg = document.getElementById("regMsg");
+        msg.textContent = "Procesando...";
+        msg.className = "msg";
+        try {
+          const res = await fetch(`${API_URL}/register`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ name, email, password }),
+          });
+          const data = await res.json();
+          if (res.ok) {
+            msg.textContent = "✅ Registro exitoso";
+            msg.classList.add("success");
+            setTimeout(() => {
+              registerForm.classList.add("hidden");
+              loginForm.classList.remove("hidden");
+            }, 1500);
+          } else {
+            msg.textContent = `❌ ${data.error || "Error en el registro"}`;
+            msg.classList.add("error");
+          }
+        } catch (err) {
+          msg.textContent = "❌ Error de conexión";
+          msg.classList.add("error");
+        }
+      }
+      async function login() {
+        const email = document.getElementById("loginEmail").value.trim();
+        const password = document.getElementById("loginPassword").value.trim();
+        const msg = document.getElementById("loginMsg");
+        msg.textContent = "Procesando...";
+        msg.className = "msg";
+        try {
+          const res = await fetch(`${API_URL}/login`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ email, password }),
+            credentials: "include"
+          });
+          const data = await res.json();
+          if (res.ok) {
+            localStorage.setItem("token", data.token);
+            localStorage.setItem(
+              "user",
+              JSON.stringify({
+                userId: data.user.userId,
+                name: data.user.name,
+                email: data.user.email,
+                isPremium: data.user.isPremium,
+              })
+            );
+            msg.textContent = "✅ Login exitoso";
+            msg.classList.add("success");
+            setTimeout(() => {
+              window.location.href = "dashboard.html";
+            }, 1000);
+          } else {
+            msg.textContent = `❌ ${data.error || "Credenciales inválidas"}`;
+            msg.classList.add("error");
+          }
+        } catch (err) {
+          msg.textContent = "❌ Error de conexión";
+          msg.classList.add("error");
+        }
+      }
+    </script>
+  </body>
 </html>
