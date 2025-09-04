@@ -12,7 +12,6 @@
     />
     <link rel="stylesheet" href="main.css" />
     <style>
-      /* Estilos específicos para el dashboard */
       .dashboard-container {
         display: flex;
         flex-direction: column;
@@ -60,11 +59,11 @@
         background-color: var(--primary-hover);
       }
       .action-buttons a.btn-portada {
-        background-color: #bb86fc; /* Color de portada.css */
+        background-color: #bb86fc;
         color: black;
       }
       .action-buttons a.btn-portada:hover {
-        background-color: #9c68e1; /* Hover de portada.css */
+        background-color: #9c68e1;
       }
       .logout-link {
         margin-top: 2rem;
@@ -80,11 +79,11 @@
   <body>
     <div class="dashboard-container">
       <div class="dashboard-card">
-        <h2 id="welcomeMsg">Bienvenido, Usuario</h2>
+        <h2 id="welcomeMsg">Bienvenido</h2>
         <p>¿Qué quieres crear hoy?</p>
         <div class="action-buttons">
           <a href="poster.html" class="btn-poster">✨ Generar Póster de Video</a>
-          <a href="portada.html" class="btn-portada">🎶 Generar Poste de Música</a>
+          <a href="portada.html" class="btn-portada">🎶 Generar Póster de Música</a>
         </div>
         <a href="#" id="logoutBtn" class="logout-link">Cerrar Sesión</a>
       </div>
@@ -98,7 +97,7 @@
       if (!user || !token) {
         window.location.href = "index.html";
       } else {
-        welcomeMsg.textContent = `Bienvenido, ${user.name}`;
+        welcomeMsg.textContent = `Bienvenido, ${user.name}${user.isPremium ? " 👑" : ""}`;
       }
 
       logoutBtn.addEventListener("click", (e) => {

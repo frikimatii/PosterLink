@@ -1,147 +1,108 @@
 <!DOCTYPE html>
 <html lang="es">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>PosterLink - Generador de Pósters</title>
-    <link rel="stylesheet" href="main.css" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap"
-      rel="stylesheet"
-    />
-  </head>
-  <body>
-    <header class="main-header">
-      <div class="header-content">
-        <h1 class="logo">PosterLink</h1>
-        <div class="controls-container">
-          <input
-            type="text"
-            id="youtubeUrl"
-            placeholder="Pega la URL de YouTube aquí..."
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PosterLink - Generador de Pósters</title>
+  <link rel="stylesheet" href="main.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet"/>
+</head>
+<body>
+  <header class="main-header">
+    <div class="header-content">
+      <h1 class="logo">PosterLink</h1>
+      <div class="controls-container">
+        <input
+          type="text"
+          id="youtubeUrl"
+          placeholder="Pega la URL de YouTube aquí..."
+        />
+        <button id="generateBtn">✨ Generar Póster</button>
+      </div>
+      <div class="user-session">
+        <span id="welcomeMsg">Hola, Invitado</span>
+        <a href="#" id="logoutBtn">Salir</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <div id="poster-viewer">
+      <div id="poster">
+        <div class="image-frame">
+          <img
+            id="thumbnail"
+            src=""
+            alt="Previsualización de la miniatura del video"
           />
-          <button id="generateBtn">✨ Generar Póster</button>
         </div>
-        <div class="user-session">
-          <span id="welcomeMsg">Hola, Invitado</span>
-          <a href="#" id="logoutBtn">Salir</a>
-        </div>
-      </div>
-    </header>
-
-    <main>
-      <div id="poster-viewer">
-        <div id="poster">
-          <div class="image-frame">
-            <img
-              id="thumbnail"
-              src=""
-              alt="Previsualización de la miniatura del video"
-            />
+        <div class="poster-content">
+          <div class="poster-text-content">
+            <p id="videoTitle">El título de tu video aparecerá aquí</p>
+            <p class="video-description"></p>
           </div>
-          <div class="poster-content">
-            <div class="poster-text-content">
-              <p id="videoTitle">El título de tu video aparecerá aquí</p>
-              <p class="video-description"></p>
+          <div class="poster-footer">
+            <div id="palette"></div>
+            <div id="youtubeLogoContainer">
+              <!-- Logo se pintará dinámicamente en poster.js -->
             </div>
-            <div class="poster-footer">
-              <div id="palette"></div>
-              <div id="youtubeLogoContainer">
-                <svg
-                  fill="#000000"
-                  viewBox="-3.2 -3.2 38.40 38.40"
-                  xmlns="http://www.w3.org/2000/svg"
-                  transform="matrix(1, 0, 0, -1, 0, 0)rotate(45)"
-                  stroke="#000000"
-                >
-                  <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-                  <g
-                    id="SVGRepo_tracerCarrier"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  ></g>
-                  <g id="SVGRepo_iconCarrier">
-                    <path
-                      d="M24.325 8.309s-2.655-.334-8.357-.334c-5.517 0-8.294.334-8.294.334A2.675 2.675 0 0 0 5 10.984v10.034a2.675 2.675 0 0 0 2.674 2.676s2.582.332 8.294.332c5.709 0 8.357-.332 8.357-.332A2.673 2.673 0 0 0 27 21.018V10.982a2.673 2.673 0 0 0-2.675-2.673zM13.061 19.975V12.03L20.195 16l-7.134 3.975z"
-                    ></path>
-                  </g>
-                </svg>
-              </div>
-              <div id="qrcode"></div>
-            </div>
+            <div id="qrcode"></div>
           </div>
         </div>
       </div>
-      <div id="premiumModal" class="modal hidden">
-        <div class="modal-content">
-          <span class="close-btn">&times;</span>
-          <h2>Mejora a Premium ✨</h2>
-          <p>
-            ¡Desbloquea descargas y subidas ilimitadas con nuestra versión
-            Premium!
-          </p>
-          <button id="payBtn">Pagar $4.99</button>
-        </div>
-      </div>
+    </div>
 
-      <div id="actions-panel">
-        <p id="statusMsg">Ingresa una URL para comenzar</p>
-        <button id="remixBtn">🎨 Remezclar Paleta</button>
-        <a id="ctaBtn" href="#" target="_blank" class="hidden"
-          >▶ Ver en YouTube</a
-        >
-        <button id="downloadBtn" disabled>Descargar Póster</button>
-        <button id="galleryBtn" class="hidden">Galería</button>
+    <!-- Modal Premium -->
+    <div id="premiumModal" class="modal hidden">
+      <div class="modal-content">
+        <span class="close-btn">&times;</span>
+        <h2>Mejora a Premium ✨</h2>
+        <p>¡Desbloquea descargas y galería ilimitadas con nuestra versión Premium!</p>
+        <button id="payBtn">Pagar $4.99</button>
       </div>
+    </div>
 
-      <div id="user-notes">
-        <h2>Guía Rápida para Usar PosterLink</h2>
-        <p>
-          PosterLink te ayuda a crear pósters únicos para tus videos de YouTube
-          de forma automática. Aquí tienes un resumen de cómo usarlo:
-        </p>
-        <ul>
-          <li>
-            <b>1. Genera el Póster:</b> Pega la URL de cualquier video de
-            YouTube en el campo de texto y haz clic en "✨ Generar Póster". La
-            aplicación extraerá automáticamente la miniatura, el título y los
-            colores del video.
-          </li>
-          <li>
-            <b>2. Personaliza (Opcional):</b> En la parte inferior del póster
-            verás una paleta de colores. Si no te gusta el orden, haz clic en el
-            botón "🎨 Remezclar Paleta" para reorganizar los colores de forma
-            aleatoria. ¡Puedes hacerlo tantas veces como quieras!
-          </li>
-          <li>
-            <b>3. Descarga tu Creación:</b> Haz clic en el botón "Descargar
-            Póster" para guardar la imagen. La aplicación creará una imagen de
-            alta resolución con el póster que ves en pantalla, lista para que la
-            compartas.
-          </li>
-        </ul>
-        <div class="note-box">
-          <p>
-            <b>¿Qué es el Código QR?</b> El código QR en la esquina inferior es
-            un enlace directo a tu video. Cualquier persona puede escanearlo con
-            la cámara de su teléfono para ver el video de inmediato en YouTube.
-          </p>
-        </div>
+    <!-- Panel de acciones -->
+    <div id="actions-panel">
+      <p id="statusMsg">Ingresa una URL para comenzar</p>
+      <button id="remixBtn">🎨 Remezclar Paleta</button>
+      <a id="ctaBtn" href="#" target="_blank" class="hidden">▶ Ver en YouTube</a>
+      <button id="downloadBtn" disabled>Descargar Póster</button>
+      <button id="galleryBtn" class="hidden">Galería</button>
+      <!-- 🔹 Botón para volver al Dashboard -->
+      <button id="dashboardBtn">🏠 Volver al Menu</button>
+    </div>
+
+    <!-- Notas para el usuario -->
+    <div id="user-notes">
+      <h2>Guía Rápida para Usar PosterLink</h2>
+      <p>
+        PosterLink te ayuda a crear pósters únicos para tus videos de YouTube
+        de forma automática. Aquí tienes un resumen de cómo usarlo:
+      </p>
+      <ul>
+        <li><b>1. Genera el Póster:</b> Pega la URL de un video y haz clic en "✨ Generar Póster".</li>
+        <li><b>2. Personaliza:</b> Usa "🎨 Remezclar Paleta" para reorganizar los colores.</li>
+        <li><b>3. Descarga:</b> Haz clic en "Descargar Póster". Si eres Premium, además se guarda en tu galería.</li>
+      </ul>
+      <div class="note-box">
+        <p><b>¿Qué es el Código QR?</b> El código QR en la esquina inferior enlaza directo a tu video en YouTube.</p>
       </div>
-    </main>
-    <script src="https://storage.ko-fi.com/cdn/scripts/overlay-widget.js"></script>
-    <script>
-      kofiWidgetOverlay.draw("only1dollar", {
-        type: "floating-chat",
-        "floating-chat.donateButton.text": "Donate",
-        "floating-chat.donateButton.background-color": "#794bc4",
-        "floating-chat.donateButton.text-color": "#fff",
-      });
-    </script>
-    <script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js"></script>
-    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
-    <script src="poster.js"></script>
-  </body>
+    </div>
+  </main>
+
+  <!-- Scripts externos -->
+  <script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js"></script>
+  <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+  <script src="poster.js"></script>
+
+  <script>
+    // 🔹 Redirección al Dashboard
+    document.getElementById("dashboardBtn").addEventListener("click", () => {
+      window.location.href = "dashboard.html";
+    });
+  </script>
+</body>
 </html>

@@ -7,8 +7,8 @@ import dotenv from "dotenv";
 import helmet from "helmet";
 import ratelimit from "express-rate-limit";
 import getColors from "get-image-colors";
-import fetch from 'node-fetch';
-import FormData from 'form-data';
+import fetch from "node-fetch";
+import FormData from "form-data";
 
 dotenv.config();
 
@@ -22,9 +22,8 @@ const IMGBB_API_KEY = process.env.IMGBB_API_KEY || "";
 app.use(express.json({ limit: "500mb" }));
 app.use(helmet());
 app.use(cors({
-    origin: ["http://127.0.0.1:5500", "http://localhost:5500"],
-    methods: ["GET", "POST", "DELETE", "OPTIONS"],
-    credentials: true
+    origin: "*", // En producción, reemplaza con tu frontend si quieres
+    methods: ["GET", "POST", "DELETE", "OPTIONS"]
 }));
 
 const authLimiter = ratelimit({
@@ -191,10 +190,10 @@ app.post("/upload-to-imgbb", auth, async (req, res) => {
     }
 
     try {
-        const formData = new FormData();
         const base64Data = imageData.split(',')[1];
-        const buffer = Buffer.from(base64Data, 'base64');
-        formData.append("image", buffer, { filename: filename, contentType: "image/png" });
+
+        const formData = new FormData();
+        formData.append("image", base64Data); // Solo base64, evita problemas en producción
 
         const imgbbUrl = `https://api.imgbb.com/1/upload?key=${IMGBB_API_KEY}`;
         const response = await fetch(imgbbUrl, {
@@ -207,10 +206,9 @@ app.post("/upload-to-imgbb", auth, async (req, res) => {
         if (data.success) {
             req.user.posters.push(data.data.url);
             await req.user.save();
-
             res.json({ message: "Imagen subida y guardada con éxito.", url: data.data.url });
         } else {
-            res.status(400).json({ error: data.error.message || "Error al subir la imagen a imgbb." });
+            res.status(400).json({ error: data.error?.message || "Error al subir la imagen a imgbb." });
         }
     } catch (error) {
         console.error("Error en el endpoint de subida:", error);
@@ -234,17 +232,15 @@ app.post("/update-to-premium", auth, async (req, res) => {
         console.error("Error al actualizar a premium:", error);
         res.status(500).json({ error: "Error interno del servidor." });
     }
-})
+});
 
-// 🚨 NUEVO: Endpoint para la galería de pósters
+// 🚨 Endpoint para la galería de pósters
 app.get("/get-posters", auth, async (req, res) => {
     try {
         if (!req.user.isPremium) {
             return res.status(403).json({ error: "Acceso denegado. Esta función es solo para usuarios premium." });
         }
-
         res.json({ posters: req.user.posters });
-
     } catch (error) {
         console.error("Error al obtener los pósters:", error);
         res.status(500).json({ error: "Error interno del servidor." });

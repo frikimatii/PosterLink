@@ -1,15 +1,15 @@
 {
   "name": "cuadro-youtbe",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "server2.js",
+  "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "start": "node server2.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "description": "",
+  "engines": {
+    "node": ">=18"
+  },
   "dependencies": {
     "@supabase/supabase-js": "^2.56.0",
     "axios": "^1.11.0",
@@ -31,6 +31,5 @@
     "node-vibrant": "^4.0.3",
     "puppeteer": "^24.17.1",
     "yt-dlp-exec": "^1.0.2"
-  },
-  "type": "module"
+  }
 }
