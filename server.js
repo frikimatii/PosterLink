@@ -7,7 +7,7 @@ import bcrypt from "bcrypt";
 
 const app = express();
 app.use(express.json());
-app.use(cors({ origin: "http://127.0.0.1:5500" }));
+app.use(cors({ origin: "https://frikimatii.github.io/PosterLink" }));
 
 const url = "mongodb+srv://fernandomatiasjuarez88:pwwm9eo6O7i7IKyv@basededatosmatias.fxkuru7.mongodb.net/?retryWrites=true&w=majority&appName=basededatosMATIAS";
 const client = new MongoClient(url);
@@ -31,7 +31,7 @@ async function connectDB() {
 async function startServer() {
     try {
         await connectDB(); // aseguramos que todo esté listo
-        app.listen(5000, () => console.log("Servidor corriendo en http://localhost:5000"));
+        app.listen(5000, () => console.log("Servidor corriendo en https://frikimatii.github.io/PosterLink"));
     } catch (err) {
         console.error("Error conectando a MongoDB:", err);
     }
@@ -153,4 +153,4 @@ app.post("/save-thumbnail", async (req, res) => {
     }
 });
 
-app.listen(5000, () => console.log("Servidor corriendo en http://localhost:5000"));
+app.listen(5000, () => console.log("Servidor corriendo en https://frikimatii.github.io/PosterLink"));

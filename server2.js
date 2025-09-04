@@ -22,7 +22,7 @@ const IMGBB_API_KEY = process.env.IMGBB_API_KEY || "";
 app.use(express.json({ limit: "500mb" }));
 app.use(helmet());
 app.use(cors({
-    origin: "*", // En producción, reemplaza con tu frontend si quieres
+    origin: "https://frikimatii.github.io/PosterLink", // En producción, reemplaza con tu frontend si quieres
     methods: ["GET", "POST", "DELETE", "OPTIONS"]
 }));
 
@@ -249,5 +249,5 @@ app.get("/get-posters", auth, async (req, res) => {
 
 // Iniciar servidor
 app.listen(PORT, () => {
-    console.log(`🚀 Servidor corriendo en http://localhost:${PORT}`);
+    console.log(`🚀 Servidor corriendo en https://frikimatii.github.io/PosterLink`);
 });
