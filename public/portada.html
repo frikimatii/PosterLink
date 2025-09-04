@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <link rel="stylesheet" href="main.css" />
+    <style>
+      /* Estilos de portada.css se mantendrán */
+      .back-and-logout {
+        position: absolute;
+        top: 1em;
+        right: 1em;
+        display: flex;
+        gap: 1em;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="back-and-logout">
+      <a href="dashboard.html" class="back-link">Volver al menú</a>
+      <a href="#" id="logoutBtn" class="back-link">Cerrar Sesión</a>
+    </div>
+    <div class="container">
+      </div>
+    <script>
+      // Lógica de logout para esta página
+      const logoutBtn = document.getElementById("logoutBtn");
+      logoutBtn.addEventListener("click", (e) => {
+        e.preventDefault();
+        localStorage.removeItem("user");
+        localStorage.removeItem("token");
+        window.location.href = "index.html";
+      });
+      // ...código existente de portada.js
+    </script>
+  </body>
+</html>

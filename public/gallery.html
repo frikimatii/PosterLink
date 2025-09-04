@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Galería de Pósters</title>
+    <link rel="stylesheet" href="main.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+</head>
+<body>
+    <header class="main-header">
+        <div class="header-content">
+            <h1 class="logo">PosterLink - Galería</h1>
+            <a href="poster.html" class="back-link">← Volver al Generador</a>
+        </div>
+    </header>
+
+    <main>
+        <div class="gallery-container">
+            <h2 id="gallery-title">Tus Pósters Guardados</h2>
+            <p id="gallery-msg" class="info-msg"></p>
+            <div id="gallery" class="image-grid">
+                </div>
+        </div>
+    </main>
+    
+    <div id="imageModal" class="modal hidden">
+        <span class="close-btn">&times;</span>
+        <img class="modal-content" id="modalImage">
+    </div>
+
+    <script>
+        const API_URL = "http://localhost:5000";
+        const galleryDiv = document.getElementById("gallery");
+        const galleryMsg = document.getElementById("gallery-msg");
+        const modal = document.getElementById("imageModal");
+        const modalImage = document.getElementById("modalImage");
+        const closeBtn = document.querySelector(".close-btn");
+
+        const user = JSON.parse(localStorage.getItem("user"));
+        const token = localStorage.getItem("token");
+
+        // Importante: Verificar si el usuario es premium
+        if (!user || !token || !user.isPremium) {
+            window.location.href = "index.html"; 
+            alert("Acceso denegado. Esta función es solo para usuarios premium.");
+        }
+
+        async function fetchGalleryImages() {
+            galleryMsg.textContent = "Cargando galería...";
+            try {
+                const res = await fetch(`${API_URL}/get-posters`, {
+                    method: "GET",
+                    headers: {
+                        "Authorization": `Bearer ${token}`
+                    }
+                });
+
+                const data = await res.json();
+
+                if (!res.ok) {
+                    throw new Error(data.error || "No se pudo cargar la galería.");
+                }
+
+                if (data.posters.length === 0) {
+                    galleryMsg.textContent = "No tienes pósters guardados. Genera uno y descárgalo para que aparezca aquí.";
+                    return;
+                }
+
+                galleryMsg.textContent = ""; 
+                galleryDiv.innerHTML = ""; 
+                
+                data.posters.forEach(posterUrl => {
+                    const imgContainer = document.createElement("div");
+                    imgContainer.className = "image-item";
+                    
+                    const img = document.createElement("img");
+                    img.src = posterUrl;
+                    img.alt = "Póster de YouTube";
+                    img.loading = "lazy"; 
+                    
+                    // 🚨 NUEVO: Agregar el evento de clic a cada imagen
+                    img.addEventListener('click', () => {
+                        modal.classList.remove("hidden");
+                        modalImage.src = img.src;
+                    });
+
+                    imgContainer.appendChild(img);
+                    galleryDiv.appendChild(imgContainer);
+                });
+
+            } catch (error) {
+                console.error("Error al cargar la galería:", error);
+                galleryMsg.textContent = `Error: ${error.message}`;
+            }
+        }
+
+        // 🚨 NUEVO: Eventos para cerrar el modal
+        closeBtn.addEventListener('click', () => {
+            modal.classList.add("hidden");
+        });
+
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                modal.classList.add("hidden");
+            }
+        });
+
+        document.addEventListener("DOMContentLoaded", fetchGalleryImages);
+    </script>
+</body>
+</html>
