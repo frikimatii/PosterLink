@@ -12,7 +12,7 @@ const trackListDiv = document.getElementById('track-list');
 const token1 = localStorage.getItem('token')// ... (código existente, como las constantes de los elementos del DOM)
 
 // **Importante:** Asegúrate de que esta URL coincida con la de tu servidor
-const BACKEND_URL = 'http://localhost:5000'; 
+const BACKEND_URL = 'https://posterlink.onrender.com'; 
 
 form.addEventListener('submit', async (e) => {
     e.preventDefault();

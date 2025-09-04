@@ -19,7 +19,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const galleryBtn = document.getElementById("galleryBtn");
 
   // --- VARIABLES DE ESTADO ---
-  const API_URL = "http://localhost:5000";
+  const API_URL = "https://posterlink.onrender.com";
   let currentVideoData = null;
 
   // --- LÓGICA DE SESIÓN ---
