@@ -22,12 +22,24 @@ const IMGBB_API_KEY = process.env.IMGBB_API_KEY || "";
 app.use(express.json({ limit: "500mb" }));
 app.use(helmet());
 
+const allowedOrigins = [
+  "https://frikimatii.github.io", // ✅ frontend en producción
+  "http://localhost:3000"         // ✅ pruebas locales
+];
+
 app.use(cors({
-  origin: "https://frikimatii.github.io", // ✅ así de simple
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error("No permitido por CORS: " + origin));
+    }
+  },
   methods: ["GET", "POST", "DELETE", "OPTIONS"],
   allowedHeaders: ["Content-Type", "Authorization"],
   credentials: true
 }));
+
 app.options("*", cors());
 app.set("trust proxy", 1);
 
