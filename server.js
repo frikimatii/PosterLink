@@ -18,6 +18,8 @@ const MONGO_URI = process.env.MONGO_URI || "";
 const JWT_SECRET = process.env.JWT_SECRET || "";
 const IMGBB_API_KEY = process.env.IMGBB_API_KEY || "";
 
+console.log("ENV vars:", Object.keys(process.env));
+
 // --- Middlewares ---
 app.use(express.json({ limit: "500mb" }));
 app.use(helmet());
