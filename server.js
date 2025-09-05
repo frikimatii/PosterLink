@@ -19,7 +19,12 @@ const JWT_SECRET = process.env.JWT_SECRET || "";
 const IMGBB_API_KEY = process.env.IMGBB_API_KEY || "";
 
 console.log("ENV vars:", Object.keys(process.env));
+// Evita que DEBUG_URL u otras variables externas interfieran
+process.env.DEBUG_URL = "";
 
+app._router.stack.forEach((r) => {
+  if (r.route && r.route.path) console.log("Ruta registrada:", r.route.path);
+});
 // --- Middlewares ---
 app.use(express.json({ limit: "500mb" }));
 app.use(helmet());
