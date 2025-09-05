@@ -23,12 +23,11 @@ app.use(express.json({ limit: "500mb" }));
 app.use(helmet());
 
 app.use(cors({
-  origin: "https://frikimatii.github.io/PosterLink",
+  origin: "https://frikimatii.github.io", // ✅ así de simple
   methods: ["GET", "POST", "DELETE", "OPTIONS"],
   allowedHeaders: ["Content-Type", "Authorization"],
   credentials: true
 }));
-
 app.options("*", cors());
 app.set("trust proxy", 1);
 
