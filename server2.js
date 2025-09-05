@@ -21,14 +21,12 @@ const IMGBB_API_KEY = process.env.IMGBB_API_KEY || "";
 // --- Middlewares ---
 app.use(express.json({ limit: "500mb" }));
 app.use(helmet());
-app.use(
-  cors({
-    origin: "https://frikimatii.github.io", // tu frontend
+app.use(cors({
+    origin: "https://frikimatii.github.io", // ✅ este es tu verdadero origin
     methods: ["GET", "POST", "DELETE", "OPTIONS"],
     allowedHeaders: ["Content-Type", "Authorization"],
-    credentials: true,
-  })
-);
+    credentials: true
+}));
 
 app.options("*", cors());
 app.set("trust proxy", 1);
