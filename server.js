@@ -18,21 +18,9 @@ const MONGO_URI = process.env.MONGO_URI || "";
 const JWT_SECRET = process.env.JWT_SECRET || "";
 const IMGBB_API_KEY = process.env.IMGBB_API_KEY || "";
 
-console.log("ENV vars:", Object.keys(process.env));
-// Evita que DEBUG_URL u otras variables externas interfieran
-process.env.DEBUG_URL = "";
-
-app._router.stack.forEach((r) => {
-  if (r.route && r.route.path) console.log("Ruta registrada:", r.route.path);
-});
 // --- Middlewares ---
 app.use(express.json({ limit: "500mb" }));
 app.use(helmet());
-
-const allowedOrigins = [
-  "https://frikimatii.github.io", // ✅ frontend en producción
-  "http://localhost:3000"         // ✅ pruebas locales
-];
 
 app.use(cors({
   origin: "https://frikimatii.github.io",
@@ -41,18 +29,11 @@ app.use(cors({
   credentials: true
 }));
 
-if (app._router && app._router.stack) {
-  app._router.stack.forEach((r) => {
-    if (r.route && r.route.path) {
-      console.log("Ruta cargada:", r.route.path);
-    }
-  });
-}
-
 app.options("*", cors({
   origin: "https://frikimatii.github.io",
   credentials: true
 }));
+
 app.set("trust proxy", 1);
 
 const authLimiter = ratelimit({
