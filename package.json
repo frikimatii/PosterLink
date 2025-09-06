@@ -29,6 +29,7 @@
     "multer": "^2.0.2",
     "node-fetch": "^2.7.0",
     "node-vibrant": "^4.0.3",
-    "puppeteer": "^24.17.1"
+    "puppeteer": "^24.17.1",
+    "yt-dlp-exec": "^1.0.2"
   }
 }
