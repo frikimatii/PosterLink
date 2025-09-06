@@ -203,11 +203,12 @@ app.post("/get-video-info", auth, async (req, res) => {
     const colors = await getColors(buffer, "image/jpeg");
     const palette = colors.map((c) => c.hex());
 
+    // --- CORRECCIÓN AQUÍ: Extracción del título mejorada ---
     const videoPageResponse = await fetch(
       `https://www.youtube.com/watch?v=${videoId}`
     );
     const html = await videoPageResponse.text();
-    const match = html.match(/<title>(.*?)<\/title>/);
+    const match = html.match(/<title>([^<]+)<\/title>/);
     const title = match
       ? match[1].replace(" - YouTube", "").trim()
       : "Título no disponible";
