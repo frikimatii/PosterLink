@@ -35,19 +35,17 @@ const allowedOrigins = [
 ];
 
 app.use(cors({
-  origin: function (origin, callback) {
-    if (!origin || allowedOrigins.includes(origin)) {
-      callback(null, true);
-    } else {
-      callback(new Error("No permitido por CORS: " + origin));
-    }
-  },
+  origin: "https://frikimatii.github.io",
   methods: ["GET", "POST", "DELETE", "OPTIONS"],
   allowedHeaders: ["Content-Type", "Authorization"],
   credentials: true
 }));
 
-app.options("*", cors());
+
+app.options("*", cors({
+  origin: "https://frikimatii.github.io",
+  credentials: true
+}));
 app.set("trust proxy", 1);
 
 const authLimiter = ratelimit({
