@@ -29,11 +29,6 @@ app.use(cors({
   credentials: true
 }));
 
-app.options("*", cors({
-  origin: "https://frikimatii.github.io",
-  credentials: true
-}));
-
 app.set("trust proxy", 1);
 
 const authLimiter = ratelimit({
