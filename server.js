@@ -41,6 +41,13 @@ app.use(cors({
   credentials: true
 }));
 
+if (app._router && app._router.stack) {
+  app._router.stack.forEach((r) => {
+    if (r.route && r.route.path) {
+      console.log("Ruta cargada:", r.route.path);
+    }
+  });
+}
 
 app.options("*", cors({
   origin: "https://frikimatii.github.io",
